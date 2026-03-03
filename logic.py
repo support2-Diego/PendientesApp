@@ -9,26 +9,21 @@ class TaskLogic:
             dias_restantes = (fecha_limite - hoy).days
 
             if dias_restantes <= 0:
-                return "HOY/VENCIDO", "#FF4444" # Rojo (Hoy o pasado)
+                return "red600"
             elif dias_restantes == 1:
-                return "MAÑANA", "#FF8C00"      # Naranja (Mañana)
+                return "orange600"
             else:
-                return "A TIEMPO", "#4CAF50"    # Verde (2 días o más)
+                return "green600"
         except ValueError:
-            return "ERROR", "#808080"
+            return "grey400"
 
     @staticmethod
     def obtener_color_prioridad(nivel):
-        # 1: Alto (Rojo), 2: Medio (Naranja), 3: Bajo (Verde)
-        colores = {
-            1: "#FF4444", 
-            2: "#FF8C00", 
-            3: "#4CAF50"  
-        }
-        return colores.get(nivel, "#808080")
+        colores = {1: "red600", 2: "orange600", 3: "green600"}
+        return colores.get(nivel, "grey400")
 
     @staticmethod
     def validar_datos(tarea):
-        if not tarea.strip():
+        if not tarea or not tarea.strip():
             return False, "Escribe un título."
         return True, "OK"
